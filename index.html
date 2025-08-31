@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZBus Login</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+       background-color: #ffffff;
+    color: #4f88e2;
+    display: flex
+;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-shadow: 0px 0px 0px 0px rgb(131 132 181);
+
+    position: relative;
+    }
+
+    .navbar .title {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        flex: 1;
+    }
+
+    .navbar button {
+    background: none;
+    border: none;
+    color: #6faade;
+    font-size: 24px;
+    cursor: pointer;
+    }
+
+    .navbar .left {
+        position: absolute;
+        left: 20px;
+    }
+
+    .navbar .right {
+        position: absolute;
+        right: 20px;
+    }
+
+    /* Main login container */
+    .login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    align-content: center;
+    flex-wrap: nowrap;
+    }
+
+    .login-box {
+        background: white;
+        width: 100%;
+        max-width: 400px;
+        padding: 40px;
+        border-radius: 0px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .login-box h1 {
+        color: #1558B0;
+        margin-bottom: 30px;
+        font-weight: normal;
+    }
+
+    input[type="text"] {
+        width: 65%;
+        padding: 25px 0px;
+        font-size: 23px;
+        border-radius: 25px;
+        border: 2px solid #ccc;
+        transition: border 0.3s;
+        text-align: center;
+        margin-top: 11rem;
+    }
+
+    input[type="text"]:focus {
+        border-color: #1A73E8;
+        outline: none;
+    }
+
+    input.invalid {
+        border-color: #AC2022;
+    }
+
+    button.login-btn {
+        margin-top: 20px;
+        width: 73%;
+        padding: 24px 0PX;
+        border-radius: 25px;
+        border: none;
+        background-color: #1A73E8;
+        color: white;
+        font-size: 31px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        MARGIN-TOP: 18REM;
+        
+    }
+
+    button.login-btn:hover {
+        background-color: #3447a8;
+    }
+
+    .helper-text {
+        margin-top: 5%;
+        color: #3B3B3B;
+        font-size: 20px;
+    }
+    .helper-text.error {
+    color: #AC2022; /* red */
+    font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <button class="left" onclick="history.back()">&#8592;</button>
+    <div class="title">ZBus</div>
+    <button class="right">&#9776;</button>
+    <!-- <button class="right"><img src="img/menu.png" alt="menu-btn"></button> -->
+</div>
+
+<!-- Login Form -->
+<div class="login-container">
+    <div class="login-box">
+        <h1>ورود / ثبت نام</h1>
+        <input type="text" id="phone" placeholder="مثال: 09123456789">
+        <div class="helper-text" id="helpTex">شماره موبایل خود را وارد کنید.</div>
+        <button class="login-btn" id="sendBtn">ورود</button>
+    </div>
+</div>
+
+<script>
+    const sendBtn = document.getElementById('sendBtn');
+    const phoneInput = document.getElementById('phone');
+    const helperTex = document.getElementById('helpTex');
+
+    sendBtn.addEventListener('click', () => {
+        const phone = phoneInput.value.trim();
+        const phonePattern = /^09\d{9}$/;
+        if(phonePattern.test(phone)) {
+            phoneInput.classList.remove('invalid');
+            alert('کد تایید ارسال شد!');
+            // Replace with real API call
+            window.location.href = `verification.html?phone=${phone}`;
+        } else {
+            phoneInput.classList.add('invalid');
+            helperTex.innerHTML='شماره موبایل وارد شده <span style="color:#AC2022;">اشتباه</span> است';
+            helperTex.classList.add('error');
+        }
+    });
+</script>
+
+</body>
+</html>
